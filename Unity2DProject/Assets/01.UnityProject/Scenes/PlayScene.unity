@@ -1078,6 +1078,8 @@ MonoBehaviour:
   scoreText: {fileID: 2064365468}
   scoreText_: {fileID: 0}
   gameOverUi: {fileID: 1223142903}
+  growTime: 0
+  isMushroom: 0
 --- !u!4 &1480823084
 Transform:
   m_ObjectHideFlags: 0
@@ -1494,7 +1496,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: -1316895021
+  m_SortingLayerID: 1291814889
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1967350169
