@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public static partial class GFunc
@@ -23,7 +24,7 @@ public static partial class GFunc
 
 
     [System.Diagnostics.Conditional("DEBUG_MODE")]
-    public static void LogWarning(bool condition)
+    public static void LogWarning(object message)
     {
 #if DEBUG_MODE
         Debug.LogWarning(message);
@@ -39,6 +40,18 @@ public static partial class GFunc
         textComponent.text = text;
     }
 
+    // LoadScene 함수 래핑한다.
+    public static void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    // 현재 씬의 이름을 리턴한다.
+    public static string GetActiveSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
+
     //! 두 벡터를 더한다.
     // this Vector3 origin은 ScrollingObject에서 transforn.position을 뜻한다.
     public static Vector2 AddVector(this Vector3 origin, Vector2 addVector)
@@ -46,5 +59,22 @@ public static partial class GFunc
         Vector2 result = new Vector2(origin.x, origin.y);
         result += addVector;
         return result;
+    }
+
+    //! 컴포넌트가 존재하는지 여부를 체크하는 함수
+    public static bool IsValid<T>(this T target) where T : Component
+    {
+        if (target == null || target == default) { return false; }
+        else { return true; }
+    }
+
+    //! 리스트가 유효한지 여부를 체크하는 함수
+    public static bool IsValid<T>(this List<T> target)
+    {
+        bool isInvalid = (target == null || target == default);
+        isInvalid = isInvalid || target.Count == 0;
+
+        if (isInvalid == true) { return false; }
+        else { return true; }
     }
 }

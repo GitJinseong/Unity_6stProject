@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerControler : MonoBehaviour
 {
     public AudioClip deathClip;
-    private float jumpForce = 1000f;
+    private float jumpForce = 300f;
     private int jumpCount = 0;
     private bool isGrounded = false;
     private bool isDead = false;
@@ -30,14 +30,14 @@ public class PlayerControler : MonoBehaviour
     {
         if (isDead) { return; }
 
-        if (Input.GetMouseButton(0) && jumpCount < 2)
+        if (Input.GetMouseButtonDown(0) && jumpCount < 2)
         {
             jumpCount += 1;
             playerRigid.velocity = Vector2.zero;
             playerRigid.AddForce(new Vector2(0, jumpForce));
             playerAudio.Play();
         }
-        else if(Input.GetMouseButton(0) && 0 < playerRigid.velocity.y)
+        else if(Input.GetMouseButtonDown(0) && 0 < playerRigid.velocity.y)
         {
             playerRigid.velocity = playerRigid.velocity * 0.5f;
         }
@@ -53,6 +53,8 @@ public class PlayerControler : MonoBehaviour
 
         playerRigid .velocity = Vector2.zero;
         isDead = true;
+
+        GameManager.instance.OnPlayerDead();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
