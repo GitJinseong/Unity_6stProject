@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviour
     public TMP_Text scoreText;          // Text Mash Pro 컴포넌트 쓴 경우
     public Text scoreText_;    // Legacy Text 컴포넌트 쓴 경우
     public GameObject gameOverUi;
-
+    public float growTime;
+    public bool isMushroom = false;
+    GameObject player;
     private int score = 0;
 
     private void Awake()
@@ -46,6 +48,13 @@ public class GameManager : MonoBehaviour
             // GFunc.LoadScene("PlayScene");
             GFunc.LoadScene(GFunc.GetActiveSceneName());
         }
+
+        if ((growTime + 3f) <= Time.time && growTime != 0f)
+        {
+            growTime = 0f;
+            player.transform.localScale /= 2f;
+            isMushroom = false;
+        }
     }
 
     public void AddSCore(int newScore)
@@ -61,5 +70,10 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         gameOverUi.SetActive(true);
+    }
+
+    public void LinkPlayer(GameObject player_)
+    {
+        player = player_;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerControler : MonoBehaviour
@@ -23,6 +24,8 @@ public class PlayerControler : MonoBehaviour
         GFunc.Assert(playerRigid != null);
         GFunc.Assert(animator != null);
         GFunc.Assert(playerAudio != null);
+
+        GameManager.instance.LinkPlayer(gameObject);
     }
 
     // Update is called once per frame
