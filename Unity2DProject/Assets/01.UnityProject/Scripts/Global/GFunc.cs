@@ -21,6 +21,15 @@ public static partial class GFunc
 #endif
     }
 
+
+    [System.Diagnostics.Conditional("DEBUG_MODE")]
+    public static void LogWarning(bool condition)
+    {
+#if DEBUG_MODE
+        Debug.LogWarning(message);
+#endif
+    }
+
     //! GameObject 받아서 Text 컴포넌트 찾아서 text 필드 값 수정하는 함수
     public static void SetText(this GameObject target, string text)
     {
